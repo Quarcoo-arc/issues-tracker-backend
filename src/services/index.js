@@ -64,14 +64,21 @@ issueService.updateIssue = async (req, res) => {
 issueService.deleteIssue = async (req, res) => {
   try {
     const { id } = req.params;
-    const issue = await Issue.findOne({ _id: id });
+    if (!id) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Issue ID is required" });
+    }
+
+    const issue = await Issue.findById(id);
     if (!issue) {
       return res
         .status(404)
         .json({ success: false, message: "Issue not found!" });
     }
-    await issue.destroy();
-    console.log(`Deleted issue id: ${id}`);
+
+    await Issue.deleteOne({ _id: id });
+
     return res
       .status(200)
       .json({ success: true, message: "Successfully deleted issue!" });
