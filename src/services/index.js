@@ -29,7 +29,7 @@ issueService.createIssue = async (req, res, next) => {
 
 issueService.getIssues = async (req, res) => {
   try {
-    const issues = await Issue.findAll();
+    const issues = await Issue.find({});
     return res.status(200).json({ success: true, data: issues });
   } catch (error) {
     return res
@@ -62,7 +62,7 @@ issueService.updateIssue = async (req, res) => {
 
 issueService.deleteIssue = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const issue = await Issue.findOne({ _id: id });
     if (!issue) {
       return res

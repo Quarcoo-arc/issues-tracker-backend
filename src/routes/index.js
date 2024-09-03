@@ -9,4 +9,6 @@ router.get("/", issueService.getIssues);
 
 router.put("/", issueService.updateIssue);
 
+router.delete("/:id", issueService.deleteIssue);
+
 module.exports = router;
