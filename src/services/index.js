@@ -17,6 +17,7 @@ issueService.createIssue = async (req, res, next) => {
         .status(500)
         .json({ success: false, message: "Failed to create issue!" });
     }
+    console.log(issue);
     return res
       .status(200)
       .json({ success: true, message: "Successfully created issue" });
@@ -51,7 +52,7 @@ issueService.updateIssue = async (req, res) => {
     issue.description = description;
 
     const updatedIssue = await issue.save();
-
+    console.log(updatedIssue);
     return res.status(200).json({ success: true, data: updatedIssue });
   } catch (error) {
     return res
@@ -70,6 +71,7 @@ issueService.deleteIssue = async (req, res) => {
         .json({ success: false, message: "Issue not found!" });
     }
     await issue.destroy();
+    console.log(`Deleted issue id: ${id}`);
     return res
       .status(200)
       .json({ success: true, message: "Successfully deleted issue!" });
