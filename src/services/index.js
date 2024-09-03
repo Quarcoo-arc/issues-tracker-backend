@@ -20,7 +20,11 @@ issueService.createIssue = async (req, res, next) => {
     console.log(issue);
     return res
       .status(200)
-      .json({ success: true, message: "Successfully created issue" });
+      .json({
+        success: true,
+        message: "Successfully created issue",
+        data: issue,
+      });
   } catch (error) {
     return res
       .status(error.status || 500)
